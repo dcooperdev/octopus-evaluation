@@ -1,2 +1,3 @@
 mongoose
 bcrypt
+jsonwebtoken

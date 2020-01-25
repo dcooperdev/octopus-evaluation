@@ -2,9 +2,12 @@ const express = require('express')
 const router = express.Router()
 const signup = require('../controller/signup.controller')
 
-router.get('/', async ( req,res ) => {  
+router.get('/', async ( req,res ) => {
+
+    const { username_email } = req.headers;
+
     try {
-        const result = await signup.emailExists( req.headers );
+        const result = await signup.emailExists( username_email );
 
         if ( result === null ) {
             res.status(404).json({
@@ -22,8 +25,11 @@ router.get('/', async ( req,res ) => {
     }
 })
 router.post('/', async ( req,res ) => {
+
+    const { complete_name, username_email, password } = req.body;
+
     try {
-        const result = await signup.CreateUser( req.body );
+        const result = await signup.CreateUser( complete_name, username_email, password );
         
         res.status(200).json(
             result

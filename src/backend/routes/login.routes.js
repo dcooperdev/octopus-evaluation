@@ -1,20 +1,22 @@
 const express = require('express')
 const router = express.Router()
+const Login = require('../controller/login.controller')
 
 router.get('/', async ( req,res ) => {
-    res.status(200).json({
-        success: true,
-        body: 'You get the response from Login!'
-    })
 })
 router.post('/', async ( req,res ) => {
-    res.status(200).json({
-        success: true,
-        body: {
-            message: 'This is your post body',
-            body: req.body
-        }
-    })
+    
+    try {
+        const { username_email, password } = req.body
+        const token = await Login.authenticateUser( username_email, password )
+
+        res.status(200).json({
+            token
+        })
+    }catch( err ) {
+        res.status(401).json({error: 'Username or password incorrect!'})
+    }
+
 })
 
 module.exports = router
