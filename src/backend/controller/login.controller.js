@@ -11,7 +11,7 @@ const authenticateUser = async ( username_email, password ) => {
     delete user.password;
 
     if ( match ) {
-        
+
         return await jws.tokenize( user )
 
     }
