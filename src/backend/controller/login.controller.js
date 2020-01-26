@@ -8,6 +8,7 @@ const authenticateUser = async ( username_email, password ) => {
     const match = await bcrypt.compare(password, user.password)
 
     user = user.toObject();
+    delete user.rol;
     delete user.password;
 
     if ( match ) {

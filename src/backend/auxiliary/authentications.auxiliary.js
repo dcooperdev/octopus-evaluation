@@ -19,8 +19,15 @@ const isAuthenticated = async ( req, res, next ) => {
     next()
 }
 
-
+const isAdmin = async ( req, res, next ) => {
+    const { rol } = req.user
+    if( rol === 'admin' ) {
+        return next ? next() : true
+    }
+    return next ? res.status(401).json({ message: 'Please make sure your are an Administrator' }) : false
+}
 
 module.exports = {
-    isAuthenticated
+    isAuthenticated,
+    isAdmin
 }
