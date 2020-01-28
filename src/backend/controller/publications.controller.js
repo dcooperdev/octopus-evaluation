@@ -4,6 +4,10 @@ const getPublicationsList = async () => {
     return await Publication.find({ published: true })
 }
 
+const getPublicationById = async ( id ) => {
+    return await Publication.findOne({ _id: id, published: true })
+}
+
 const createPublication = async (title, body, image, owner) => {
 
     const publication = await Publication.create({
@@ -45,6 +49,7 @@ const unpublish = async ( id, state ) => {
 
 module.exports = {
     getPublicationsList,
+    getPublicationById,
     createPublication,
     updatePublication,
     unpublish

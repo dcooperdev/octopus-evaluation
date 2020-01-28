@@ -10,7 +10,7 @@ router.get('/', async ( req,res ) => {
         const result = await signup.emailExists( username_email );
 
         if ( result === null ) {
-            res.status(404).json({
+            res.status(200).json({
                 message: 'User doesn\'t exists'
             })
         } else {
@@ -24,7 +24,7 @@ router.get('/', async ( req,res ) => {
         )
     }
 })
-router.post('/', async ( req,res ) => {
+router.post('/', async ( req,res ) => { console.log(req.body);
 
     const { complete_name, username_email, password } = req.body;
 

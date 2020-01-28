@@ -6,10 +6,22 @@ const publication = require('../controller/publications.controller')
 
 router.get('/', async ( req,res ) => {
     try {
-        const publications = await publication.getPublicationsList();
-        res.status(200).json(
-            publications
-        )
+        const { id } = req.headers
+        console.log( id )
+        if ( id ) {
+            const result = await publication.getPublicationById( id )
+
+            res.status(200).json(
+                result
+            )
+        } else {
+            const result = await publication.getPublicationsList();
+
+            res.status(200).json(
+                result
+            )
+        }
+        
     } catch( error ) {
         res.status(500).json(
             error

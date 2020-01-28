@@ -10,11 +10,11 @@ router.post('/', async ( req,res ) => {
         const { username_email, password } = req.body
         const token = await Login.authenticateUser( username_email, password )
 
-        res.status(200).json({
+        res.status(200).json(
             token
-        })
+        )
     }catch( err ) {
-        res.status(401).json({error: 'Username or password incorrect!'})
+        res.status(401).json(err)
     }
 
 })

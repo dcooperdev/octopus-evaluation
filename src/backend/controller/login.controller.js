@@ -4,20 +4,24 @@ const jws = require('../../../modules/jsonwebtokens')
 
 const authenticateUser = async ( username_email, password ) => {
 
-    let user = await User.findOne({username_email}).select('+password')
-    const match = await bcrypt.compare(password, user.password)
+    return new Promise( async (resolve, reject) => {
 
-    user = user.toObject();
-    delete user.rol;
-    delete user.password;
+        let user = await User.findOne({username_email}).select('+password')
+        const match = await bcrypt.compare(password, user.password)
 
-    if ( match ) {
+        user = user.toObject();
+        delete user.rol;
+        delete user.password;
 
-        return await jws.tokenize( user )
+        if ( match ) {
 
-    }
+            resolve(jws.tokenize( user ))
 
-    throw new Error('something bad happened')
+        }
+
+        reject('Username or password incorrect!')
+
+    })
 
 }
 

@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-header">
+    <div class="image-container">
+      <img [src]="publicationData?.image" class="card-img-top" alt="image">
+    </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ publicationData?.title }} <small>Fecha: {{ publicationData?.createdDate }}</small></h5>
+    <p class="card-text">{{ publicationData?.body }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let comment of publicationData?.comments">
+      <p>{{ comment.comment }}</p>
+    </li>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>

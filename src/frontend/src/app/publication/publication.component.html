@@ -1,0 +1,12 @@
+<div class="card" [routerLink]="['/publication', publication._id]">
+  <img [src]="publication?.image" class="card-img-top" alt="image">
+  <div class="card-body">
+    <h5 class="card-title">{{ publication?.title }}</h5>
+    <p class="card-text">{{ publication?.body }}</p>
+  </div>
+  <div class="card-body">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+
