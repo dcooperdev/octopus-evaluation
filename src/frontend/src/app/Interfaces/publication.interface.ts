@@ -10,17 +10,17 @@ export interface Comment {
 }
 
 export interface Publication {
-  _id: string;
+  _id?: string;
   title: string;
   body: string;
   image: string;
-  owner: string;
+  owner?: string;
   likes?: [
       Like
   ],
   comments?: [
       Comment
   ],
-  published: boolean;
-  createdDate: Date;
+  published?: boolean;
+  createdDate?: Date;
 }

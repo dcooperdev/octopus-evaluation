@@ -1,20 +1,36 @@
 <div class="card">
-  <div class="card-header">
-    <div class="image-container">
-      <img [src]="publicationData?.image" class="card-img-top" alt="image">
+  <div class="card-header" [ngStyle]="{ 'background-image': 'url(' + publicationData?.image + ')'}">
+    <div class="image-container"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-8">
+
+      <div class="card-body">
+        <h5 id="title" class="card-title">{{ publicationData?.title }} <small>Fecha: {{ publicationData?.createdDate }}</small></h5>
+        <p class="card-text">{{ publicationData?.body }}</p>
+      </div>
+
+    </div>
+    <div id="likes-and-comments" class="col-sm-12 col-md-4" *ngIf="!owner && userData !== null">
+
+      <app-like [liked]="liked" (newLike)="newLike()"></app-like>
+
+      <p>Likes: {{publicationData?.likes.length}}</p>
+
+      <app-comment [commented]="commented" (newComment)="newComment( $event )"></app-comment>
+
     </div>
   </div>
-  <div class="card-body">
-    <h5 class="card-title">{{ publicationData?.title }} <small>Fecha: {{ publicationData?.createdDate }}</small></h5>
-    <p class="card-text">{{ publicationData?.body }}</p>
+
+  <div class="card-body" *ngIf="publicationData?.comments?.length > 0">
+    <h4>Comments:</h4>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let comment of publicationData?.comments">
+        <p>{{ comment.createdDate | date }} <strong>{{ comment.fullname }}</strong></p>
+        <p>{{ comment.comment }}</p>
+      </li>
+    </ul>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let comment of publicationData?.comments">
-      <p>{{ comment.comment }}</p>
-    </li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
+
 </div>

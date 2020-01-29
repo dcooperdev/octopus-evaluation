@@ -22,13 +22,15 @@ const createPublication = async (title, body, image, owner) => {
 }
 
 const updatePublication = async (id, title, body, image, published, user) => {
-    const publication = await Publication.findOne({ _id: id })
+    const pub = await Publication.findOne({ _id: id })
+    console.log({owner: pub.owner, user});
     
-    if ( publication.owner === user ) {
+    if ( pub.owner === user ) {
 
-        const update = await Publication.update(
-            { _id: id },
-            { title, body, image, published }
+        const update = await Publication.findByIdAndUpdate(
+            id,
+            { title, body, image, published },
+            { safe: true, upsert: true, new: true }
         )
         return update
     }
@@ -37,14 +39,16 @@ const updatePublication = async (id, title, body, image, published, user) => {
 }
 
 const unpublish = async ( id, state ) => {
-    const publication = await Publication.findOneAndUpdate(
-        { _id: id },
+
+    const publication = await Publication.findByIdAndUpdate(
+        id,
         {
             published: state
         },
         { safe: true, upsert: true, new: true }
     )
     return publication
+
 }
 
 module.exports = {

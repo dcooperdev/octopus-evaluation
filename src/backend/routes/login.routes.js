@@ -8,6 +8,7 @@ router.post('/', async ( req,res ) => {
     
     try {
         const { username_email, password } = req.body
+        console.log(username_email, password)
         const token = await Login.authenticateUser( username_email, password )
 
         res.status(200).json(

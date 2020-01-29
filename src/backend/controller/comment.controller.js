@@ -1,6 +1,6 @@
 const Comment = require('../models/publication.models')
 
-const createComment = async ( user, comment, publication ) => {
+const createComment = async ( user, fullname, comment, publication ) => {
     return await Comment.findOneAndUpdate(
         {
             _id: publication,
@@ -9,6 +9,7 @@ const createComment = async ( user, comment, publication ) => {
             $addToSet: {
                 comments: {
                     user,
+                    fullname,
                     comment
                 }
             }

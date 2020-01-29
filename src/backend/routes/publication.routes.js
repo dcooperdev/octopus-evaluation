@@ -67,6 +67,7 @@ router.put('/', isAuthenticated, async ( req,res,next ) => {
 })
 
 router.delete('/', isAuthenticated, isAdmin, async ( req,res ) => {
+    
     try {
         const { id, state } = req.headers
         const publications = await publication.unpublish( id, state )

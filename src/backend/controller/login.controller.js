@@ -7,16 +7,20 @@ const authenticateUser = async ( username_email, password ) => {
     return new Promise( async (resolve, reject) => {
 
         let user = await User.findOne({username_email}).select('+password')
-        const match = await bcrypt.compare(password, user.password)
 
-        user = user.toObject();
-        delete user.rol;
-        delete user.password;
+        if ( user  ) {
 
-        if ( match ) {
-
-            resolve(jws.tokenize( user ))
-
+            const match = await bcrypt.compare(password, user.password)
+    
+            user = user.toObject();
+            delete user.password;
+    
+            if ( match ) {
+    
+                resolve(jws.tokenize( user ))
+    
+            }
+            
         }
 
         reject('Username or password incorrect!')

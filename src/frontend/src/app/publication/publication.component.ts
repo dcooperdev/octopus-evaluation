@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Publication } from '../Interfaces/publication.interface';
+import { User } from '../Interfaces/user.interface';
 
 @Component({
   selector: 'app-publication',
@@ -9,6 +10,7 @@ import { Publication } from '../Interfaces/publication.interface';
 export class PublicationComponent implements OnInit {
 
   @Input() publication: Publication;
+  @Input() user: User;
 
   constructor() { }
 

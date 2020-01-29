@@ -24,7 +24,6 @@ const CreateUser = async ( complete_name, username_email, password ) => {
         })
 
         user = user.toObject();
-        delete user.rol;
         delete user.password;
 
         resolve(

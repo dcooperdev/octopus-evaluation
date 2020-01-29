@@ -1,12 +1,13 @@
-<div class="card" [routerLink]="['/publication', publication._id]">
+<div class="card">
   <img [src]="publication?.image" class="card-img-top" alt="image">
   <div class="card-body">
     <h5 class="card-title">{{ publication?.title }}</h5>
-    <p class="card-text">{{ publication?.body }}</p>
+    <p id="content" class="card-text">{{ publication?.body }}</p>
   </div>
-  <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+  <div class="card-body buttons">
+    <button class="btn btn-primary" [routerLink]="['/publication', publication._id]">Ver</button>
+    <button class="btn btn-warning" *ngIf="user?.username_email === publication?.owner" [routerLink]="['/new', publication._id]">Editar</button>
+    <button class="btn btn-danger" *ngIf="user?.rol === 'admin'" [routerLink]="['/admin', publication._id]">Eliminar</button>
   </div>
 </div>
 

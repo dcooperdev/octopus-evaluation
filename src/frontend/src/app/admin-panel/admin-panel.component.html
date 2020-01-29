@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Seguro que desea eliminar la publicacion de <strong>{{publication?.owner}}: {{publication?.title}}</strong></h4>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <section class="col-sm-12 col-md-4">
+        <img [src]="publication?.image" class="rounded mx-auto d-block" alt="publication-image" width="250" />
+      </section>
+      <section class="col-sm-12 col-md-4">
+        <p>{{publication?.body}}</p>
+      </section>
+      <section class="col-sm-12 col-md-4">
+        <div *ngFor="let comment of publication?.comments">
+          <ul>
+            <li>Date: {{comment.createdDate}}</li>
+            <li>Comment: {{comment.comment}}</li>
+          </ul>
+        </div>
+        <div>Likes: {{publication?.likes.length}}</div>
+      </section>
+    </div>
+  </div>
+  <div class="card-footer buttons">
+    <button class="btn btn-warning" [routerLink]="['/']">Cancelar</button>
+    <button class="btn btn-danger" (click)="delete()">Eliminar</button>
+  </div>
+</div>

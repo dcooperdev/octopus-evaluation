@@ -9,6 +9,7 @@ const like = new Schema({
 
 const comment = new Schema({
     user: { type: String, required: true },
+    fullname: { type: String, required: true },
     comment: { type: String, required: true },
     createdDate: { type: Date, default: Date.now }
 })
