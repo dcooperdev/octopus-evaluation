@@ -7,14 +7,16 @@ import { Title } from '@angular/platform-browser';
 })
 export class PublicationsService {
 
+  private url = 'http://localhost:3000';
+
   constructor( private http: HttpClient ) { }
 
   getPublicationsList() {
-    return this.http.get(`http://localhost:3000/api/v1/publication`);
+    return this.http.get(`${this.url}/api/v1/publication`);
   }
 
   getPublicationById( id ) {
-    return this.http.get(`http://localhost:3000/api/v1/publication`, {
+    return this.http.get(`${this.url}/api/v1/publication`, {
       headers: new HttpHeaders({
         id
       })
@@ -22,7 +24,7 @@ export class PublicationsService {
   }
 
   deletePublicationById( id ) {
-    return this.http.delete(`http://localhost:3000/api/v1/publication`, {
+    return this.http.delete(`${this.url}/api/v1/publication`, {
       headers: new HttpHeaders()
       .set('id', id)
       .set('state', 'false')
@@ -32,7 +34,7 @@ export class PublicationsService {
 
   createPublication( data ) {
     const { title, body, image } = data;
-    return this.http.post(`http://localhost:3000/api/v1/publication`, { title, body, image }, {
+    return this.http.post(`${this.url}/api/v1/publication`, { title, body, image }, {
       headers: new HttpHeaders()
       .set('authorization', localStorage.getItem('token'))
       }
@@ -41,7 +43,7 @@ export class PublicationsService {
 
   updatePublication( data ) {
     const { id, title, body, image } = data;
-    return this.http.put(`http://localhost:3000/api/v1/publication`, { id, title, body, image, published: true }, {
+    return this.http.put(`${this.url}/api/v1/publication`, { id, title, body, image, published: true }, {
       headers: new HttpHeaders()
       .set('authorization', localStorage.getItem('token'))
       }
@@ -49,7 +51,7 @@ export class PublicationsService {
   }
 
   likePublication( publication ) {
-    return this.http.post(`http://localhost:3000/api/v1/like`, { publication }, {
+    return this.http.post(`${this.url}/api/v1/like`, { publication }, {
       headers: new HttpHeaders()
       .set('authorization', localStorage.getItem('token'))
       }
@@ -57,7 +59,7 @@ export class PublicationsService {
   }
 
   commentPublication( fullname, publication,  comment ) {
-    return this.http.post(`http://localhost:3000/api/v1/comment`, { fullname, publication, comment }, {
+    return this.http.post(`${this.url}/api/v1/comment`, { fullname, publication, comment }, {
       headers: new HttpHeaders()
       .set('authorization', localStorage.getItem('token'))
       }
